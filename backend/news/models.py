@@ -8,9 +8,10 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.api.fields import ImageRenditionField
 from wagtail.api import APIField
+from wagtail_headless_preview.models import HeadlessPreviewMixin
 
 
-class NewsPage(Page):
+class NewsPage(HeadlessPreviewMixin, Page):
     intro = models.CharField(max_length=250)
     body = StreamField([
         ("heading", blocks.CharBlock(classname="full title", icon="title")),

@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'wagtail_headless_preview',
 ]
 
 MIDDLEWARE = [
@@ -176,3 +177,10 @@ WAGTAILSEARCH_BACKENDS = {
 BASE_URL = 'http://example.com'
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_URLS_REGEX = r'^/api/v2/'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+HEADLESS_PREVIEW_CLIENT_URLS = {
+    'default': 'http://localhost:8020/',
+}
