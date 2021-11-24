@@ -1,16 +1,22 @@
 from django.db import models
 
 from wagtail.core.models import Page
-from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel, RichTextFieldPanel
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.core import blocks
+from wagtail.admin.edit_handlers import FieldPanel, RichTextFieldPanel, StreamFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.api.fields import ImageRenditionField
 from wagtail.api import APIField
 
 
 class NewsPage(Page):
     intro = models.CharField(max_length=250)
-    body = RichTextField(blank=True)
+    body = StreamField([
+        ("heading", blocks.CharBlock(classname="full title", icon="title")),
+        ("paragraph", blocks.RichTextBlock(icon='pilcrow')),
+        ("image", ImageChooserBlock(icon="image")),
+    ])
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -20,7 +26,7 @@ class NewsPage(Page):
     
     content_panels = Page.content_panels + [
         FieldPanel('intro'),
-        RichTextFieldPanel('body'),
+        StreamFieldPanel('body'),
         ImageChooserPanel('image'),
     ]
     
