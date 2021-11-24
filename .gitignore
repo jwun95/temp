@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+0*.py
+!home/migrations/0001*
+!home/migrations/0002*
+media/
