@@ -44,6 +44,11 @@
             <router-link class="black dim" to="/">Home</router-link>
             <h1>{{ item.title }}</h1>
             <p v-html="item.body"></p>
+            <img v-if="item.image_thumbnail"
+            :src="'http://localhost:8000' + item.image_thumbnail.url"
+            :width="item.image_thumbnail.width"
+            :height="item.image_thumbnail.height"
+            >
         </div>
         `,
         data: function () {
